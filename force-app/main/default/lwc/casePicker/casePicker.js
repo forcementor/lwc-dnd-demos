@@ -69,7 +69,7 @@ export default class CasePicker extends LightningElement {
 
     @wire( getAllCases )
     wired_getAllCases(result) {
-        debugger;
+
         this.caseListAll = result;
 
         //Build filtered arrays if any data

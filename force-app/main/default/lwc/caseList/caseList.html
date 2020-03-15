@@ -1,18 +1,28 @@
 <template>
     <div class="droppable drop-container" ondragover={handleDragOver} ondrop={handleDrop}>
 
-        <div class="column-header">{caseStatus}</div>
-        
-        <template if:true={caseList}>
-            <template for:each={caseList} for:item="caseItem">
-                <c-case-item key={caseItem.id} case-record={caseItem} onitemdrag={handleItemDrag}>
-                </c-case-item>
-            </template>
-        </template> 
+        <!-- 
+        <lightning-card title={caseStatus} icon-name="utility:case_change_status" >
+        </lightning-card>
+        -->
 
-        <template if:false={caseList}>
-            No {caseStatus} Cases
-        </template> 
+        <lightning-tabset>
+            <lightning-tab label={caseStatus}>
+
+                <template if:true={areCases}>
+                    <template for:each={caseList} for:item="caseItem">
+                        <c-case-item key={caseItem.id} case-record={caseItem} onitemdrag={handleItemDrag}>
+                        </c-case-item>
+                    </template>
+                </template> 
+
+                <template if:false={areCases}>
+                    No {caseStatus} Cases
+                </template> 
+
+            </lightning-tab>
+        </lightning-tabset>
+
 
     </div>
 </template>

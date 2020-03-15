@@ -42,6 +42,14 @@ export default class CaseList extends LightningElement {
     }
     */
 
+    get areCases() {
+        if(this.caseList) {
+           return this.caseList.length>0;
+        } else {
+           return false; 
+        }
+    }
+
     handleDragOver(evt) {
         evt.preventDefault();
     }
