@@ -1,0 +1,25 @@
+.container {
+    width: 80%;
+    height: 400px;
+    background: white;
+    margin: auto;
+    padding: 10px;
+}
+.left {
+    width: 30%;
+    height: 200px;
+    background: #6295E1;
+    float: left;
+}
+
+.center {
+    margin-left: 30%;
+    height: 200px;
+    background: yellow;
+}
+
+.right {
+    margin-left: 60%;
+    height: 200px;
+    background: aqua;
+}

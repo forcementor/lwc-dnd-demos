@@ -1,0 +1,18 @@
+<template>
+    <div class="droppable drop-container" ondragover={handleDragOver} ondrop={handleDrop}>
+
+        <div class="column-header">{caseStatus}</div>
+        
+        <template if:true={caseList}>
+            <template for:each={caseList} for:item="caseItem">
+                <c-case-item key={caseItem.id} case-record={caseItem} onitemdrag={handleItemDrag}>
+                </c-case-item>
+            </template>
+        </template> 
+
+        <template if:false={caseList}>
+            No {caseStatus} Cases
+        </template> 
+
+    </div>
+</template>

@@ -1,0 +1,44 @@
+<template>
+    <div class="container-drag slds-text-heading_medium slds-align_absolute-center">
+        Drag and Drop: Sample 1
+    </div>
+
+    <section class="container">
+
+        <lightning-layout horizontal-align="space" multiple-rows>
+
+            <lightning-layout-item flexibility="auto" padding="around-small" size="4" >
+
+                <c-case-list case-list={caseListNew} 
+                    case-status={newStatus} 
+                    onlistitemdrag={handleListItemDrag} 
+                    onitemdrop={handleItemDrop}>
+                </c-case-list>  
+
+            </lightning-layout-item>
+
+            <lightning-layout-item flexibility="auto" padding="around-small" size="4" >
+
+                <c-case-list case-list={caseListWorking} 
+                    case-status={workingStatus} 
+                    onlistitemdrag={handleListItemDrag} 
+                    onitemdrop={handleItemDrop}>
+               </c-case-list>
+
+            </lightning-layout-item>
+
+            <lightning-layout-item flexibility="auto" padding="around-small" size="4" >
+
+                <c-case-list case-list={caseListEscalated} 
+                    case-status={escalatedStatus} 
+                    onlistitemdrag={handleListItemDrag}
+                    onitemdrop={handleItemDrop}>
+                </c-case-list>
+
+            </lightning-layout-item>
+
+        </lightning-layout>
+
+    </section>
+
+</template>
