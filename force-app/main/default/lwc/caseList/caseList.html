@@ -1,5 +1,6 @@
 <template>
-    <div class="droppable drop-container" ondragover={handleDragOver} ondrop={handleDrop}>
+    
+    <div ondrop={handleDrop} ondragover={handleDragOver}  >
 
         <lightning-tabset>
             <lightning-tab label={caseStatus}>
@@ -12,7 +13,9 @@
                 </template> 
 
                 <template if:false={areCases}>
-                    No {caseStatus} Cases
+                    <div class="slds-m-around_medium">
+                        No {caseStatus} Cases
+                    </div>     
                 </template> 
 
             </lightning-tab>

@@ -1,42 +1,10 @@
 import { LightningElement, track, wire } from 'lwc';
+import { refreshApex } from '@salesforce/apex';
 import getAllCases from '@salesforce/apex/CasePicker.getAllCases';
-//import getCasesByStatus from '@salesforce/apex/CasePicker.getCasesByStatus';
+import { updateRecord} from 'lightning/uiRecordApi';
 
-/*
-const caseData = [
-    {
-        Id:'Case001',
-        Subject:'Review Material DEX502', 
-        Status:'New', 
-        Priority:'Medium'
-    },
-    {
-        Id:'Case002',
-        Subject:'Review Material ADX211', 
-        Status:'New', 
-        Priority:'Medium'
-    },
-    {
-        Id:'Case003',
-        Subject:'Review Material CCD102', 
-        Status:'New', 
-        Priority:'Medium'
-    },
-    {
-        Id:'Case004',
-        Subject:'Review Material DEX403', 
-        Status:'New', 
-        Priority:'Medium'
-    },
-    {
-        Id:'Case005' ,
-        Subject:'Review Material DEX502', 
-        Status:'New', 
-        Priority:'Medium'
-    },
-
-];
-*/
+import FIELD_CASE_ID from '@salesforce/schema/Case.Id';
+import FIELD_CASE_STATUS from '@salesforce/schema/Case.Status';
 
 const STATUS_NEW = 'New';
 const STATUS_WORKING = 'Working';
@@ -50,22 +18,10 @@ export default class CasePicker extends LightningElement {
     @track caseListNew; 
     @track caseListWorking; 
     @track caseListEscalated;
-
-    //@track caseListFiltered;
-
     @track newStatus = STATUS_NEW;
     @track workingStatus = STATUS_WORKING;
     @track escalatedStatus = STATUS_ESCALATED;
-
-    //@track leftCases = [];
-    //@track rightCases = [];
-    @track draggingid = "";
-
-    //caseStatus = 'New';
-    //@wire( getCasesByStatus, { status: '$caseStatus'} )
-    //wired_getCasesByStatus(result) {
-    //    this.caseListFiltered = result;
-    //}
+    @track draggingId = "";
 
     @wire( getAllCases )
     wired_getAllCases(result) {
@@ -96,52 +52,29 @@ export default class CasePicker extends LightningElement {
             }
     }
 
-
-    /*
-    connectedCallback() {
-        this.distributeCases();
-    }
-
-    distributeCases() {
-
-        let curLeftCases = [];
-        let curRightCases = [];
-        this.caselist.forEach(function(c){
-            if(c.status === "New") {
-                curLeftCases.push(c);
-            } else {
-                curRightCases.push(c);
-            }
-        });
-
-        this.leftCases = curLeftCases;
-        this.rightCases = curRightCases;
-    }
-    */
-
-    handleDragOver(evt) {
-        evt.preventDefault();
-    }
-
     handleListItemDrag(evt) {
-        console.log('Dragged id is: ' + evt.detail);
-        this.draggingid = evt.detail;
+        console.log('Setting draggingId to: ' + evt.detail);
+        this.draggingId = evt.detail;
     }
 
-    /*
     handleItemDrop(evt) {
-        let draggedId = this.draggingid;
+        let draggedId = this.draggingId;
         let newStatus = evt.detail;
+        console.log('Dropped - Id is: ' + draggedId + ', Status is ' + newStatus);
 
-        let tempCases = this.caseList.filter((case) => {
-			if (case.Id === draggedId) {
-			    case.status = newStatus;           
-			}              
-			return case;       
-		});
+        //Update the record with the new status    
+        let fieldsToSave = {};
+		fieldsToSave[FIELD_CASE_ID.fieldApiName] = draggedId;
+		fieldsToSave[FIELD_CASE_STATUS.fieldApiName] = newStatus;
+		
+		const recordInput = { fields:fieldsToSave}
 
-        this.caseList = tempCases;
-        this.distributeTasks();
+		updateRecord(recordInput)
+			.then(() => {
+                refreshApex(this.caseListAll);
+			})
+			.catch(error => {
+				Utils.showToast(this,'Error updating record', error.body.message, 'error');
+			});
     }
-    */
 }
