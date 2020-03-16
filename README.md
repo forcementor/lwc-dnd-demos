@@ -6,16 +6,24 @@ This is a reference app to demonstrate Drag and Drop functionality using Lightni
 
 This is a scratch org project that requires Visual Studio Code and SFDX. 
 
-Once you have cloned the Git repository on your computer, you can run the CreateOrg.sh script that will accomplish the following:
+Once you have cloned the Git repository on your computer, authorize a DevHub by runing the SFDX command in your terminal as follows: 
 
-1 - Promt you to authorize a DevHub with the alias dhDnD
+    sfdx force:auth:web:login -d -a dhDnD
 
-2 - Creating 30 day scratch Org with the alias soDnD
+Then run the CreateOrg.sh script in your terminal as follows (this is for a Mac, adjust as needed for a PC):
 
-3 - Open the scratch Org
+    ./scripts/CreateOrg.sh
 
-4 - Pushing the project metadata to the scratch Org
+The script will do the following:
 
-5 - Push sample data to the scratch Org
+1 - Creating 30 day scratch Org with the alias soDnD
 
-Open the org and select the Drag and Drop app from the launcher.
+2 - Open the scratch Org
+
+3 - Pushing the project metadata to the scratch Org
+
+4 - Push sample data to the scratch Org
+
+In your browser once the org is open, select the Drag and Drop app from the App Launcher.
+
+Play and dissect!
