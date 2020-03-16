@@ -79,17 +79,27 @@ export default class CasePicker extends LightningElement {
 
         //Set the DRAG target Id and DROP target Status values for the update
         let draggedId = this.draggingId;
-        let newStatus = evt.detail;
+        let updatedStatus = evt.detail;
         
-        console.log('Dropped - Id is: ' + draggedId + ', Status is ' + newStatus);
+        console.log('Dropped - Id is: ' + draggedId + ', new Status is ' + updatedStatus);
 
-        //Handle the DROP ONLY if the DRAG status is NOT the DROP target Status
-        if (newStatus != this.draggingStatus) {
+        //Handle the DROP custom validations before update
+        if (updatedStatus === this.draggingStatus) {
+
+            //Don't allow if the DRAG status is NOT the DROP target Status
+            //DO NOTHING
+
+        } else if (this.newStatus == updatedStatus) { 
+                   
+            //Don't allow a record to be assigned to the New list
+            this.showToast(this,'Status Not Allowed','Case may not be set as New!', 'error');
+
+        } else {
 
             //Update the DRAG target record with its new status    
             let fieldsToSave = {};
             fieldsToSave[FIELD_CASE_ID.fieldApiName] = draggedId;
-            fieldsToSave[FIELD_CASE_STATUS.fieldApiName] = newStatus;
+            fieldsToSave[FIELD_CASE_STATUS.fieldApiName] = updatedStatus;
             const recordInput = { fields:fieldsToSave}
 
             updateRecord(recordInput)
@@ -102,8 +112,7 @@ export default class CasePicker extends LightningElement {
                     //Notify any error
                     this.showToast(this,'Error updating record', error.body.message, 'error');
                 });
-            }
-                    
+        }
     }
 
     //Notification utility function
@@ -115,4 +124,5 @@ export default class CasePicker extends LightningElement {
         });
         firingComponent.dispatchEvent(evt);
     }
+
 }
