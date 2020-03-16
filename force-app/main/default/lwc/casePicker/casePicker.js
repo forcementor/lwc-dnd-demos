@@ -92,7 +92,7 @@ export default class CasePicker extends LightningElement {
         } else if (this.newStatus == updatedStatus) { 
                    
             //Don't allow a record to be assigned to the New list
-            this.showToast(this,'Status Not Allowed','Case may not be set as New!', 'error');
+            this.showToast(this,'Status Not Allowed','Case may not be reset as New!', 'error');
 
         } else {
 
@@ -106,7 +106,6 @@ export default class CasePicker extends LightningElement {
             .then(() => {
                     //Force a refresh of all bound lists and notify success
                     refreshApex(this.caseListAll);
-                    this.showToast(this,'Update Successful', 'Case Status changed from ' + this.draggingStatus + ' to ' + newStatus, 'success');
                 })
                 .catch(error => {
                     //Notify any error
