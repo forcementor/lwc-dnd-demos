@@ -18,3 +18,4 @@ Once you have cloned the Git repository on your computer, you can run the Create
 
 5 - Push sample data to the scratch Org
 
+Open the org and select the Drag and Drop app from the launcher.
