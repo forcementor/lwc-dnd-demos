@@ -4,20 +4,19 @@
 
         <lightning-card title="Drag and Drop Case Picker" icon-name="utility:case">
             <div slot="actions">
-                <lightning-button-group>
-                    <lightning-button
-                        variant="brand"
-                        label="Refresh" 
-                        icon-name="utility:refresh"
-                        onclick={refreshData}>
-                    </lightning-button>
-                    <lightning-button
-                        variant="brand"
-                        label="Reset" 
-                        icon-name="utility:undo"
-                        onclick={resetData}>
-                    </lightning-button>     
-                </lightning-button-group>           
+                <lightning-button
+                    variant="brand"
+                    label="Refresh" 
+                    icon-name="utility:refresh"
+                    onclick={refreshData}>
+                </lightning-button>
+                &nbsp;    
+                <lightning-button
+                    variant="brand"
+                    label="Reset" 
+                    icon-name="utility:undo"
+                    onclick={resetData}>
+                </lightning-button>     
             </div>    
         </lightning-card>
 
