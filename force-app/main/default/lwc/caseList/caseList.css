@@ -1,8 +1,3 @@
-.column-header {
-    background-color: yellow;
-    width: 100%;
-}
-
-.drop-container {
-    height: 100%;
+.over {
+    background-color: #ffc;
 }

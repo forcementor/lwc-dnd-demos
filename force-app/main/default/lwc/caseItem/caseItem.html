@@ -1,5 +1,15 @@
 <template>
-    <div class="draggable" draggable="true" ondragstart={itemDragStart}>
-        {caseRecord.Subject}
+    <div class="draggable card slds-m-around_medium" draggable="true" ondragstart={itemDragStart}>
+
+        <template if:true={caseRecord}>
+            <lightning-card title={caseRecord.Subject}>
+                <div class="slds-p-horizontal_small">
+                    <p>{caseRecord.Status}</p>
+                    <p>{caseRecord.Priority}</p>
+                </div>
+            </lightning-card>
+        </template>
+            
     </div>
+
 </template>
