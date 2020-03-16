@@ -1,5 +1,6 @@
 import { LightningElement, track, wire } from 'lwc';
 import getAllCases from '@salesforce/apex/CasePicker.getAllCases';
+import resetAllCasesNew from '@salesforce/apex/CasePicker.resetAllCasesNew';
 import { updateRecord} from 'lightning/uiRecordApi';
 import { refreshApex } from '@salesforce/apex';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
@@ -63,6 +64,18 @@ export default class CasePicker extends LightningElement {
             }
     }
 
+    //Manually reset all Cases to New    
+    resetData() {
+        resetAllCasesNew()
+        .then( () => {
+            this.refreshData();
+        })
+        .catch(error => {
+            //Notify any error
+            this.showToast(this,'Error Resetting Data', error.body.message, 'error');
+        });
+    }   
+
     //Manually refresh the data
     refreshData() {
         refreshApex(this.caseListAll);
@@ -114,7 +127,7 @@ export default class CasePicker extends LightningElement {
                 })
                 .catch(error => {
                     //Notify any error
-                    this.showToast(this,'Error updating record', error.body.message, 'error');
+                    this.showToast(this,'Error Updating Record', error.body.message, 'error');
                 });
         }
     }

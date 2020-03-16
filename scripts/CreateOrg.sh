@@ -1,6 +1,4 @@
 # Execute in Mac using: ./scripts/CreateOrg.sh
-echo "*** Authorize a DevHub..."
-sfdx force:auth:web:login -d -a dhDnD
 echo "*** Creating scratch Org..."
 sfdx force:org:create -f config/project-scratch-def.json --setdefaultusername --setalias soDnD -d 30
 echo "*** Opening scratch Org..."

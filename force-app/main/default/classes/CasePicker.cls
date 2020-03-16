@@ -1,21 +1,20 @@
 public without sharing class CasePicker {
 
+    //Fetch all Cases
     @AuraEnabled(cacheable=true)
-	public static List<Case> getAllCases() {
+    public static List<Case> getAllCases() {
 		string query = 'SELECT Id, Subject, Status, Priority FROM Case ORDER BY Subject';
 		return Database.query(query);
     }
 
-    /*
-    @AuraEnabled(cacheable=true)
-	public static List<Case> getCasesByStatus(String status) {
-
-        if (status == null) {
-            status = 'New';
+    //Reset all Cases to New status
+    @AuraEnabled
+    public static void resetAllCasesNew() {
+        list<Case> allCases = [SELECT Id, Status FROM Case];
+        for (Case c : allCases) {
+            c.Status = 'New';
         }
-
-        query = 'SELECT Id, Subject, Status, Priority FROM Case WHERE Status = : ' + status + ' BY Subject';
-		return Database.query(query);
+		Database.update(allCases);
     }
-    */
+
 }
