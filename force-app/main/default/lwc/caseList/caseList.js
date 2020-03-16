@@ -27,7 +27,7 @@ export default class CaseList extends LightningElement {
         console.log('Drag event from the drag target: ' + evt.detailinto + ' for drop target: ' + this.caseStatus);
         this.cancel(evt);
 
-        //Dispatch the custom event to raise the detail up one level
+        //Dispatch the custom event to raise the detail payload up one level
         const event = new CustomEvent('listitemdrag', {
             detail: evt.detail
         });
@@ -77,8 +77,7 @@ export default class CaseList extends LightningElement {
             
         console.log('Handling Drop into drop tagert for status: ' + this.caseStatus);
         this.cancel(evt);
-        
-        //Dispatch the custom event
+
         const event = new CustomEvent('itemdrop', {
             detail: this.caseStatus
         });

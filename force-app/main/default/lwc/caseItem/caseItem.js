@@ -7,8 +7,10 @@ export default class CaseItem extends LightningElement {
         Priority:'Medium'
     };
 
+    //Property to track the original status of the DRAG target
     originalStatus;
 
+    //DRAG target drag start event handler
     itemDragStart(evt) {
 
         console.log('Handling DragStart for item: ' + this.caseRecord.Id);
@@ -20,22 +22,26 @@ export default class CaseItem extends LightningElement {
         let draggableElement = this.template.querySelector('[data-id="' + this.caseRecord.Id + '"]');
         draggableElement.classList.add('drag');
         
-        //Dispatch the custom event
+        //Dispatch the custom event and pass the record Id and Status
         const event = new CustomEvent('itemdrag', {
-            detail: this.caseRecord.Id 
+            detail: {
+                dragTargetId: this.caseRecord.Id,
+                dragTargetStatus: this.originalStatus 
+            }
         });
         this.dispatchEvent(event);
     }
 
+    //DRAG target drag end event handler
     itemDragEnd(evt) {
 
         console.log('Handling DragEnd for item: ' + this.caseRecord.Id);
         
         //Reset the style if there was no successful drop
-        if(this.caseRecord.Status == this.originalStatus) {
+        //if(this.caseRecord.Status == this.originalStatus) {
             let draggableElement = this.template.querySelector('[data-id="' + this.caseRecord.Id + '"]');
             draggableElement.classList.remove('drag');
-        }
+        //}
     }   
 
 }
