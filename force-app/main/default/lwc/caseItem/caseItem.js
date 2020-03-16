@@ -36,12 +36,10 @@ export default class CaseItem extends LightningElement {
     itemDragEnd(evt) {
 
         console.log('Handling DragEnd for item: ' + this.caseRecord.Id);
-        
-        //Reset the style if there was no successful drop
-        //if(this.caseRecord.Status == this.originalStatus) {
-            let draggableElement = this.template.querySelector('[data-id="' + this.caseRecord.Id + '"]');
-            draggableElement.classList.remove('drag');
-        //}
+ 
+        //Reset the style
+        let draggableElement = this.template.querySelector('[data-id="' + this.caseRecord.Id + '"]');
+        draggableElement.classList.remove('drag');
     }   
 
 }

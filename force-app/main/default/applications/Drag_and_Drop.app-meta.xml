@@ -11,6 +11,8 @@
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
     <label>Drag and Drop</label>
     <navType>Standard</navType>
+    <tabs>Case_Picker_Demo</tabs>
+    <tabs>standard-Case</tabs>
     <tabs>standard-Account</tabs>
     <tabs>standard-Contact</tabs>
     <uiType>Lightning</uiType>
