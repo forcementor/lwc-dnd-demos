@@ -29,6 +29,7 @@ export default class CasePicker extends LightningElement {
     @track workingStatus = STATUS_WORKING;
     @track escalatedStatus = STATUS_ESCALATED;
     
+    //Vars to track the DRAG COURSE data
     @track draggingId = "";
     @track draggingStatus = "";
 
@@ -40,7 +41,7 @@ export default class CasePicker extends LightningElement {
         this.caseListAll = result;
 
         //Build filtered arrays if data returned
-        //These lists are bound to the drop targetcomponents
+        //These lists are bound to the DROP TARGET components
         if(this.caseListAll.data) {
 
             this.caseListNew = 
@@ -76,12 +77,13 @@ export default class CasePicker extends LightningElement {
         });
     }   
 
-    //Manually refresh the data
+    //Manually refresh the data and the reactive DROP TARGET lists 
     refreshData() {
         refreshApex(this.caseListAll);
     }
 
-    //Handle the custom event dispatched from a DROP target 
+    //Handle the custom event dispatched originally from a DRAG SOURCE 
+    //and proxied from a DROP TARGET
     handleListItemDrag(evt) {
 
         console.log('Setting draggingId to: ' + evt.detail);
@@ -92,29 +94,28 @@ export default class CasePicker extends LightningElement {
 
     }
 
-    //Handle the custom event dispatched from a DROP target     
+    //Handle the custom event dispatched from a DROP TARGET     
     handleItemDrop(evt) {
 
-        //Set the DRAG target Id and DROP target Status values for the update
+        //Set the DRAG SOURCE Id and new DROP TARGET Status for the update
         let draggedId = this.draggingId;
         let updatedStatus = evt.detail;
         
         console.log('Dropped - Id is: ' + draggedId + ', new Status is ' + updatedStatus);
 
-        //Handle the DROP custom validations before update
+        //Handle custom validations before allowing an update
         if (updatedStatus === this.draggingStatus) {
 
-            //Don't allow if the DRAG status is NOT the DROP target Status
-            //DO NOTHING
+            //DO NOTHING if the DRAG status is NOT the DROP target Status
 
         } else if (this.newStatus == updatedStatus) { 
                    
-            //Don't allow a record to be assigned to the New list
+            //Don't allow any record to be assigned to the New list
             this.showToast(this,'Status Not Allowed','Case may not be reset as New!', 'error');
 
         } else {
 
-            //Update the DRAG target record with its new status    
+            //Update the DRAG SOURCE record with its new status    
             let fieldsToSave = {};
             fieldsToSave[FIELD_CASE_ID.fieldApiName] = draggedId;
             fieldsToSave[FIELD_CASE_STATUS.fieldApiName] = updatedStatus;
@@ -122,7 +123,7 @@ export default class CasePicker extends LightningElement {
 
             updateRecord(recordInput)
             .then(() => {
-                    //Force a refresh of all bound lists and notify success
+                    //Force a refresh of all bound lists
                     refreshApex(this.caseListAll);
                 })
                 .catch(error => {

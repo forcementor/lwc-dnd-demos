@@ -14,7 +14,7 @@ public without sharing class CasePicker {
         for (Case c : allCases) {
             c.Status = 'New';
         }
-		Database.update(allCases);
+		    Database.update(allCases);
     }
 
 }

@@ -21,7 +21,7 @@ export default class CaseList extends LightningElement {
         return false;
     };
 
-    //DRAG target drag event handler dispatched from the child component
+    //DRAG SOURCE drag event handler dispatched from the child component
     handleItemDrag(evt) {
         
         console.log('Drag event from the drag target: ' + evt.detailinto + ' for drop target: ' + this.caseStatus);
@@ -34,7 +34,7 @@ export default class CaseList extends LightningElement {
         this.dispatchEvent(event);
     }
 
-    //DROP target dragenter event handler
+    //DROP TARGET dragenter event handler
     handleDragEnter(evt) {
 
         console.log('Drag Enter event for ' + this.caseStatus);
@@ -44,7 +44,7 @@ export default class CaseList extends LightningElement {
 
     }
 
-    //DROP target dragover event handler
+    //DROP TARGET dragover event handler
     handleDragOver(evt) {
         
         console.log('Drag Over event for ' + this.caseStatus);
@@ -58,7 +58,7 @@ export default class CaseList extends LightningElement {
 
     }
 
-    //DROP target dragover event handler
+    //DROP TARGET dragleave event handler
     handleDragLeave(evt) {
         
         console.log('Drag Leave event for ' + this.caseStatus);
@@ -72,7 +72,7 @@ export default class CaseList extends LightningElement {
 
     }
 
-    //DROP target drop event handler
+    //DROP TARGET drop event handler
     handleDrop(evt) {
             
         console.log('Handling Drop into drop tagert for status: ' + this.caseStatus);

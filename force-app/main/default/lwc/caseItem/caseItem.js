@@ -2,18 +2,11 @@ import { LightningElement, api } from 'lwc';
 
 export default class CaseItem extends LightningElement {
     @api caseRecord;
-    /*
-    = {
-        Subject:'Review DEX502', 
-        Status:'New', 
-        Priority:'Medium'
-    };
-    */
 
     //Property to track the original status of the DRAG target
     originalStatus;
 
-    //DRAG target drag start event handler
+    //DRAG SOURCE dragstart event handler
     itemDragStart(evt) {
 
         console.log('Handling DragStart for item: ' + this.caseRecord.Id);
@@ -35,7 +28,7 @@ export default class CaseItem extends LightningElement {
         this.dispatchEvent(event);
     }
 
-    //DRAG target drag end event handler
+    //DRAG SOURCE dragend event handler
     itemDragEnd(evt) {
 
         console.log('Handling DragEnd for item: ' + this.caseRecord.Id);
