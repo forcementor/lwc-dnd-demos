@@ -76,8 +76,11 @@ export default class CaseList extends LightningElement {
     handleDrop(evt) {
             
         console.log('Handling Drop into drop tagert for status: ' + this.caseStatus);
+        
+        //Cancel the event
         this.cancel(evt);
 
+        //Dispatch the custom event to raise the detail payload up one level        
         const event = new CustomEvent('itemdrop', {
             detail: this.caseStatus
         });
