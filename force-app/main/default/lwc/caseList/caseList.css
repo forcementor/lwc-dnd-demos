@@ -1,3 +1,4 @@
 .over {
-    background-color: #ffc;
+    border-style: solid dotted;
+    border-color: green;
 }

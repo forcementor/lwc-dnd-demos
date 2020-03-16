@@ -1,6 +1,10 @@
 <template>
     
-    <div ondrop={handleDrop} ondragover={handleDragOver}  >
+    <div data-role="drop-target" 
+         ondrop={handleDrop} 
+         ondragenter={handleDragEnter} 
+         ondragover={handleDragOver} 
+         ondragleave={handleDragLeave} >
 
         <lightning-tabset>
             <lightning-tab label={caseStatus}>
