@@ -3,6 +3,14 @@
     <div class="slds-m-bottom_small">
 
         <lightning-card title="Drag and Drop Case Picker" icon-name="utility:case">
+            <div slot="actions">
+                <lightning-button
+                    variant="brand"
+                    label="Refresh" 
+                    icon-name="utility:refresh"
+                    onclick={refreshData}>
+                </lightning-button>
+            </div>    
         </lightning-card>
 
             <lightning-layout horizontal-align="space" multiple-rows>

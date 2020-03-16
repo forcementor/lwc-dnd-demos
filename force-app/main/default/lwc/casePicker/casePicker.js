@@ -63,6 +63,11 @@ export default class CasePicker extends LightningElement {
             }
     }
 
+    //Manually refresh the data
+    refreshData() {
+        refreshApex(this.caseListAll);
+    }
+
     //Handle the custom event dispatched from a DROP target 
     handleListItemDrag(evt) {
 

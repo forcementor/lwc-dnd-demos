@@ -1,11 +1,14 @@
 import { LightningElement, api } from 'lwc';
 
 export default class CaseItem extends LightningElement {
-    @api caseRecord = {
+    @api caseRecord;
+    /*
+    = {
         Subject:'Review DEX502', 
         Status:'New', 
         Priority:'Medium'
     };
+    */
 
     //Property to track the original status of the DRAG target
     originalStatus;
