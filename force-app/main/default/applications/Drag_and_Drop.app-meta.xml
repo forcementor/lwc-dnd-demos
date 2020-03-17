@@ -12,11 +12,11 @@
     <label>Drag and Drop</label>
     <navType>Standard</navType>
     <tabs>Case_Picker_Demo</tabs>
+    <tabs>Case_Picker_App</tabs>
     <tabs>standard-Case</tabs>
     <tabs>standard-Account</tabs>
     <tabs>standard-Contact</tabs>
     <tabs>standard-Lead</tabs>
-    <tabs>Lead_Kanban_VF</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Drag_and_Drop_Demos_UtilityBar</utilityBar>
 </CustomApplication>

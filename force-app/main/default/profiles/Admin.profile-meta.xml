@@ -22,10 +22,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>LeadKanbanController</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>LeadsData</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -34,6 +30,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <custom>false</custom>
+    <tabVisibilities>
+        <tab>Case_Picker_App</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
     <tabVisibilities>
         <tab>Case_Picker_Demo</tab>
         <visibility>DefaultOn</visibility>

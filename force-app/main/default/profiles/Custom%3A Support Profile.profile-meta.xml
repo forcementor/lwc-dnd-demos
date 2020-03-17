@@ -22,10 +22,6 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>LeadKanbanController</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>LeadsData</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -34,16 +30,12 @@
         <enabled>false</enabled>
     </classAccesses>
     <custom>true</custom>
-    <pageAccesses>
-        <apexPage>LeadKanban</apexPage>
-        <enabled>false</enabled>
-    </pageAccesses>
     <tabVisibilities>
-        <tab>Case_Picker_Demo</tab>
+        <tab>Case_Picker_App</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
-        <tab>Lead_Kanban_VF</tab>
+        <tab>Case_Picker_Demo</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <userLicense>Salesforce</userLicense>
