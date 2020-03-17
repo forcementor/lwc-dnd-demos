@@ -36,10 +36,24 @@ export default class CaseListForPage extends LightningElement {
     @track draggingId = "";
     @track draggingStatus = "";
 
+    //Var to force initilization of data
+    isInitialized = false;
+
 	connectedCallback() {
         registerListener('statusChange', this.handleStatusChange, this);
         registerListener('dragStarted', this.handleDragStarted, this);
-	}
+        //refreshApex(this.caseListAll);
+    }
+    
+    /*
+    renderedCallback() {
+        if(!this.isInitialized) {
+            //Force a refresh
+            refreshApex(this.caseListAll);
+            this.isInitialized = true;
+        };
+    }
+    */
 
     @wire(CurrentPageReference) pageRef;
 
