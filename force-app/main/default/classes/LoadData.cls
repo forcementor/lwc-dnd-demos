@@ -5,11 +5,13 @@ public without sharing class LoadData {
 		Map<String, Account> accounts = AccountsData.buildData();
 		Map<String, Contact> contacts = ContactsData.buildData(accounts);
 		Map<String, Case> cases = CasesData.buildData();
+		Map<String, Lead> leads = LeadsData.buildData();
 		
     }
 
 	public static void clearData() {
 
+		delete [SELECT Id FROM Lead];
 		delete [SELECT Id FROM Case];
 		delete [SELECT Id FROM Contact];
 		delete [SELECT Id FROM Account];
