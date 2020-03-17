@@ -82,7 +82,9 @@ export default class CaseList extends LightningElement {
 
         //Dispatch the custom event to raise the detail payload up one level        
         const event = new CustomEvent('itemdrop', {
-            detail: this.caseStatus
+            detail: this.caseStatus,
+            bubbles:true,
+            composed:true
         });
         this.dispatchEvent(event);
 

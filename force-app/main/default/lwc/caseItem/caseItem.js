@@ -23,7 +23,9 @@ export default class CaseItem extends LightningElement {
             detail: {
                 dragTargetId: this.caseRecord.Id,
                 dragTargetStatus: this.originalStatus 
-            }
+            },
+            bubbles:true,
+            composed:true
         });
         this.dispatchEvent(event);
     }
