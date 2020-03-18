@@ -22,10 +22,10 @@ export default class CaseListForPage extends LightningElement {
     @api selectedStatus = "";
 
     //A list of all cases for all status
-    @track caseListAll; 
+    @track caseListAll = []; 
 
     //Filtered array
-    @track caseListFiltered;
+    @track caseListFiltered = [];
 
     //Status values for the lists
     @track newStatus = STATUS_NEW;
@@ -42,39 +42,87 @@ export default class CaseListForPage extends LightningElement {
 	connectedCallback() {
         registerListener('statusChange', this.handleStatusChange, this);
         registerListener('dragStarted', this.handleDragStarted, this);
-        //refreshApex(this.caseListAll);
+        console.log('Connected Callback this.selectedStatus: ', this.selectedStatus);
     }
     
-    /*
     renderedCallback() {
         if(!this.isInitialized) {
             //Force a refresh
-            refreshApex(this.caseListAll);
             this.isInitialized = true;
+            this.buildFilteredList();    
         };
     }
-    */
-
+    
     @wire(CurrentPageReference) pageRef;
 
     //Wired Apex method to fetch all records
     @wire( getAllCases )
     wired_getAllCases(result) {
 
+        console.log('wired_getAllCases() this.selectedStatus: ', this.selectedStatus);
+
         //Capture the returned data and any errors
         this.caseListAll = result;
+        
+        this.buildFilteredList();
+
+        /*
+        if (this.caseListAll.data) {
+
+            let tempCaseListFiltered = [];
+            for(var i=0; i<this.caseListAll.data.length;i++) {
+                if(this.caseListAll.data[i].Status == this.selectedStatus) {
+                    tempCaseListFiltered.push(this.caseListAll.data[i]);
+                }
+            }
+            this.caseListFiltered = tempCaseListFiltered;
+        }
+        */
 
         //Build filtered arrays if data returned
         //These lists are bound to the DROP TARGET components
+        /*
         if(this.caseListAll.data) {
 
+            let tempCaseListFiltered = 
+                this.caseListAll.data.filter(
+                    (caseItem) => {
+                    return caseItem.Status === this.selectedStatus;       
+                });
+
+            this.caseListFiltered = tempCaseListFiltered;
+    
+        }
+        */ 
+               
+    }
+
+    buildFilteredList() {
+        
+        if (this.caseListAll.data && this.selectedStatus != '') {
+        
+            //let tempCaseListFiltered = 
             this.caseListFiltered = 
                 this.caseListAll.data.filter(
                     (caseItem) => {
                     return caseItem.Status === this.selectedStatus;       
                 });
-        }        
+
+            //this.caseListFiltered = tempCaseListFiltered;
+
+            /*
+            let tempCaseListFiltered = [];
+            for(var i=0; i<this.caseListAll.data.length;i++) {
+                if(this.caseListAll.data[i].Status == this.selectedStatus) {
+                    tempCaseListFiltered.push(this.caseListAll.data[i]);
+                }
+            }
+            this.caseListFiltered = tempCaseListFiltered;
+            */
+        
+        }
     }
+
 
     //Handle the custom event dispatched originally from a DRAG SOURCE 
     //and proxied from a DROP TARGET
