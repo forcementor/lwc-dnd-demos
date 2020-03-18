@@ -3,6 +3,8 @@ import getAllCases from '@salesforce/apex/CasePicker.getAllCases';
 import { updateRecord} from 'lightning/uiRecordApi';
 import { refreshApex } from '@salesforce/apex';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+
+//Required for PubSub
 import { fireEvent } from 'c/pubsub';
 import { registerListener } from 'c/pubsub';
 import { CurrentPageReference } from 'lightning/navigation';
@@ -46,9 +48,14 @@ export default class CaseListForPage extends LightningElement {
     }
     
     renderedCallback() {
+
         if(!this.isInitialized) {
-            //Force a refresh
+
+            //Should only be needed once on render
             this.isInitialized = true;
+
+            //Attempt to build the filtered list
+            //'Belt and Suspenders' redundant call as async behavior requires it
             this.buildFilteredList();    
         };
     }
@@ -64,65 +71,26 @@ export default class CaseListForPage extends LightningElement {
         //Capture the returned data and any errors
         this.caseListAll = result;
         
+        //Attempt to build the filtered list
+        //'Belt and Suspenders' redundant call as async behavior requires it
         this.buildFilteredList();
-
-        /*
-        if (this.caseListAll.data) {
-
-            let tempCaseListFiltered = [];
-            for(var i=0; i<this.caseListAll.data.length;i++) {
-                if(this.caseListAll.data[i].Status == this.selectedStatus) {
-                    tempCaseListFiltered.push(this.caseListAll.data[i]);
-                }
-            }
-            this.caseListFiltered = tempCaseListFiltered;
-        }
-        */
-
-        //Build filtered arrays if data returned
-        //These lists are bound to the DROP TARGET components
-        /*
-        if(this.caseListAll.data) {
-
-            let tempCaseListFiltered = 
-                this.caseListAll.data.filter(
-                    (caseItem) => {
-                    return caseItem.Status === this.selectedStatus;       
-                });
-
-            this.caseListFiltered = tempCaseListFiltered;
-    
-        }
-        */ 
-               
+              
     }
 
+    //Will build the filtered list from the all data list
     buildFilteredList() {
         
+        //Only build if the data and status are present    
         if (this.caseListAll.data && this.selectedStatus != '') {
         
-            //let tempCaseListFiltered = 
             this.caseListFiltered = 
                 this.caseListAll.data.filter(
                     (caseItem) => {
                     return caseItem.Status === this.selectedStatus;       
                 });
 
-            //this.caseListFiltered = tempCaseListFiltered;
-
-            /*
-            let tempCaseListFiltered = [];
-            for(var i=0; i<this.caseListAll.data.length;i++) {
-                if(this.caseListAll.data[i].Status == this.selectedStatus) {
-                    tempCaseListFiltered.push(this.caseListAll.data[i]);
-                }
-            }
-            this.caseListFiltered = tempCaseListFiltered;
-            */
-        
         }
     }
-
 
     //Handle the custom event dispatched originally from a DRAG SOURCE 
     //and proxied from a DROP TARGET
@@ -194,12 +162,12 @@ export default class CaseListForPage extends LightningElement {
         firingComponent.dispatchEvent(evt);
     }
 
-    //Handler for a status change
+    //Handler for a PubSub status change event
     handleStatusChange() {
         refreshApex(this.caseListAll);
     }
 
-    //Handler for a drag started
+    //Handler for a PubSub drag started event
     handleDragStarted(detail) {
         this.draggingId = detail.dragTargetId;
         this.draggingStatus = detail.dragTargetStatus;
