@@ -2,6 +2,6 @@
 <CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
     <description>Created by Lightning App Builder</description>
     <flexiPage>Case_Picker_App</flexiPage>
-    <label>Case Picker App</label>
+    <label>Case Picker (Loosely Coupled)</label>
     <motif>Custom90: Scales</motif>
 </CustomTab>
