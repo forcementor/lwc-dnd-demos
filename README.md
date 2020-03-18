@@ -8,7 +8,7 @@ The first app tightly couples the components, and leverages custom events for me
 
 The other app uses a loosly coupled model allowing reuse of the custom base components that can be dropped and configured on an App Page. Cross component messaging uses a pubsub eventing model. Reusability of the base components is accomplished by adding a wrapper component that handles the custom events and brokers them with pubsub events allowing cross page messaging.
 
-One key architectural approach is to minimize the data transfer of messaging payloads using custom eventing payloads rather than the data transfer capability of the HTML drag and drop events as would be the case with standard web development. 
+One key architectural approach is to minimize the data transfer of messaging payloads using custom eventing payloads instead of the data transfer capability of the HTML drag and drop events, as would be the case with standard web development. 
 
 A second key architectural approach is to use the data processing logic capabilities of Lightning Web Components, and to manage the reactive rerendering of the components in response to the drag and drop events processed.
 
