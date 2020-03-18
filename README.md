@@ -12,6 +12,8 @@ One key architectural approach is to minimize the data transfer of messaging pay
 
 A second key architectural approach is to use the data processing logic capabilities of the Lightning Web Component framework, and to manage the reactive rerendering of the components in response to the drag and drop events processed rather than the direct manipulation of the DOM as would be the case with standard web development.
 
+And finally, validation of the associated UI rules is accomplished with JavaScript logic written into the event handlers, rather than implementation of the standard HTML5 drop effects to control allowable behavior. 
+
 ## To Set Up The Project
 
 This is a scratch org project that requires Visual Studio Code and SFDX. 
