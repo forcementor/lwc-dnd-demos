@@ -30,12 +30,20 @@
         <enabled>true</enabled>
     </classAccesses>
     <custom>false</custom>
+    <pageAccesses>
+        <apexPage>DragAndDropHTMLDemo</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
     <tabVisibilities>
         <tab>Case_Picker_App</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
         <tab>Case_Picker_Demo</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>HTML_Standard_DnD_Example</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <userLicense>Salesforce</userLicense>

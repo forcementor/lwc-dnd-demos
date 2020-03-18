@@ -11,6 +11,7 @@
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
     <label>Drag and Drop</label>
     <navType>Standard</navType>
+    <tabs>HTML_Standard_DnD_Example</tabs>
     <tabs>Case_Picker_Demo</tabs>
     <tabs>Case_Picker_App</tabs>
     <tabs>standard-Case</tabs>

@@ -1,0 +1,156 @@
+<apex:page docType="html"> 
+    
+    <html lang="en">
+
+        <header>
+
+            <style>
+                [data-role="drag-drop-target"] {
+                    float: left;
+                    width: 500px;
+                    height: 330px;
+                    margin: 10px;
+                    padding: 10px;
+                    border: 3px solid #ddd;
+                    border-radius: 4px;
+                }
+            </style>  
+
+        </header>
+
+        <body>
+        
+            <!-- Drag and Drop Sample -->
+            <div id="source-container" 
+                 data-role="drag-drop-target">
+                
+                <!-- Starting place for the image -->
+                <img id="home-snapshot" 
+                     draggable="true" 
+                     src="https://images.unsplash.com/photo-1489924034176-2e678c29d4c6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"/>
+
+            </div>
+
+            <div id="target-container" 
+                 data-role="drag-drop-target">
+            	
+                <!-- Here is where we want the image to be when dragged -->
+            
+            </div>
+            
+        </body>
+
+        <script>
+        
+        //Placeholder of the DRAG SOURCE parent container id
+        var sourceContainerId;
+        
+        var dragStart = function(e) {
+            console.log('source: dragstart');
+            
+            //******************************************************************************	
+            //KEY POINTS
+            //******************************************************************************	
+            
+            //Load the DataTransfer object on the event with the element id
+            try {
+                e.dataTransfer.setData('text/plain', e.target.id);
+            } catch (ex) {
+                e.dataTransfer.setData('Text', e.target.id);
+            }
+            
+            //Caoture the DRAG SOURCE parent container element
+            sourceContainerId = this.parentElement.id;
+            
+        };
+        
+        var cancel = function(e) {
+            if (e.preventDefault) e.preventDefault();
+            if (e.stopPropagation) e.stopPropagation();
+            return false;
+        };
+        
+        var dragEnd = function(e) {
+            console.log('source: dragend');
+        };
+        
+        var drag = function(e) {
+            console.log('source: drag');
+        };
+        
+        var dropped = function(e) {
+            var id;
+            
+            console.log('target: drop');
+            
+            //******************************************************************************	
+            //KEY POINTS
+            //******************************************************************************	
+            
+            //Make sure the drop is on a different container than the original container 
+            //for the DRAG SOURCE
+            if (this.id !== sourceContainerId) {
+                cancel(e);
+                
+                //Fetch the DRAG SOURCE element id from the event's DataTransfer object
+                try {
+                    id = e.dataTransfer.getData('text/plain');
+                } catch (ex) {
+                    id = e.dataTransfer.getData('Text');
+                }
+                
+                //Re-assign the DRAG SOURCE element to its new DROP TARGET parent element in the DOM
+                //which will rerender it in the new container
+                e.target.appendChild(document.querySelector('#' + id));
+                
+            }
+        };
+        
+        var dragEnter = function(e) {
+            cancel(e);
+            console.log('target: dragenter');
+        };
+        
+        var dragOver = function(e) {
+            cancel(e);
+            console.log('target: dragover');
+        };
+        
+        var dragLeave = function(e) {
+            console.log('target: dragleave');
+        };
+        
+        
+        //******************************************************************************	
+        //KEY POINTS
+        //******************************************************************************	
+        
+        //Add the event handlers for the DRAG SOURCE and DROP TARGET elements selected by data-role
+        var targets = document.querySelectorAll('[data-role="drag-drop-target"]');
+        [].forEach.call(targets, function(target) {
+            
+            //The DROP TARGET gets a listener for the drop event where
+            //the DRAG SOURCE Id will be fetched from the event's DataTransfer payload
+            //and the element will be re-parented to the DROP TARGET element
+            target.addEventListener('drop', dropped, false);
+            
+            target.addEventListener('dragenter', dragEnter, false);
+            target.addEventListener('dragover', dragOver, false);
+            target.addEventListener('dragleave', dragLeave, false);
+        });
+        
+        var sources = document.querySelectorAll('[draggable="true"]');
+        [].forEach.call(sources, function(source) {
+
+            //The DRAG SOURCE gets a listener for the dragstart event where
+            //its element Id will be loaded into the event's DataTransfer payload
+            source.addEventListener('dragstart', dragStart, false);
+
+            source.addEventListener('drag', drag, false);
+            source.addEventListener('dragend', dragEnd, false);
+        });            
+        </script>
+        
+    </html>
+
+</apex:page>
