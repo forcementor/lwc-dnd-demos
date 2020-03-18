@@ -1,9 +1,10 @@
 <template>
-    <div class="draggable-card slds-m-around_small" 
+    <div class="slds-m-around_small draggable-card" 
          draggable="true" 
+         data-id={caseRecord.Id}         
          ondragstart={itemDragStart}
          ondragend={itemDragEnd}
-         data-id={caseRecord.Id}>
+         >
 
         <lightning-card title={caseRecord.Subject}>
             <div class="slds-p-horizontal_small">
