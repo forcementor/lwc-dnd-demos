@@ -52,10 +52,8 @@ export default class CaseList extends LightningElement {
         //Cancel the event
         this.cancel(evt);
 
-        //Set the style to indicate the element is being dragged over
-        let draggableElement = this.template.querySelector('[data-role="drop-target"]');
-        draggableElement.classList.add('over');
-
+        this.addDragOverStyle()
+ 
     }
 
     //DROP TARGET dragleave event handler
@@ -65,10 +63,8 @@ export default class CaseList extends LightningElement {
         
         //Cancel the event
         this.cancel(evt);
-
-        //Reset the style as the drag is being dragged off the element
-        let draggableElement = this.template.querySelector('[data-role="drop-target"]');
-        draggableElement.classList.remove('over');
+        
+        this.removeDragOverStyle();
 
     }
 
@@ -86,9 +82,20 @@ export default class CaseList extends LightningElement {
         });
         this.dispatchEvent(event);
 
-        //Reset the style
+        this.removeDragOverStyle();
+ 
+    }
+
+    //Set the style to indicate the element is being dragged over
+    addDragOverStyle() {
+        let draggableElement = this.template.querySelector('[data-role="drop-target"]');
+        draggableElement.classList.add('over');
+    }
+
+    //Reset the style
+    removeDragOverStyle() {
         let draggableElement = this.template.querySelector('[data-role="drop-target"]');
         draggableElement.classList.remove('over');
-        
     }
+
 }
