@@ -108,7 +108,7 @@ export default class CasePicker extends LightningElement {
 
             //DO NOTHING if the DRAG status is NOT the DROP target Status
 
-        } else if (this.newStatus == updatedStatus) { 
+        } else if (updatedStatus == this.newStatus) { 
                    
             //Don't allow any record to be assigned to the New list
             this.showToast(this,'Status Not Allowed','Case may not be reset as New!', 'error');
