@@ -127,7 +127,7 @@ export default class CaseListForPage extends LightningElement {
         } else if (this.newStatus == updatedStatus) { 
                    
             //Don't allow any record to be assigned to the New list
-            this.showToast(this,'Status Not Allowed','Case may not be reset as New!', 'error');
+            this.showToast(this,'Drop Not Allowed','Case may not be reset as New!', 'error');
 
         } else {
 
