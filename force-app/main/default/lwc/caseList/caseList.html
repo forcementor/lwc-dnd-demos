@@ -11,7 +11,9 @@
 
                 <template if:true={areCases}>
                     <template for:each={caseList} for:item="caseItem">
-                        <c-case-item key={caseItem.id} case-record={caseItem} onitemdrag={handleItemDrag}>
+                        <c-case-item key={caseItem.id} 
+                                     case-record={caseItem} 
+                                     onitemdrag={handleItemDrag}>
                         </c-case-item>
                     </template>
                 </template> 
