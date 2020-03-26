@@ -28,11 +28,11 @@
                 <h1><u>New</u></h1><br/><br/>    
 
                 <!-- Starting place for the image -->
-                <img id="home-snapshot" 
+                <img id="case-image" 
                      draggable="true" 
                      width = "225px"
                      height = "175px"
-                     src="https://www.kindpng.com/picc/m/420-4201774_manage-your-cases-and-matters-case-management-system.png"/>
+                     src="{!$Resource.Case}" />
 
             </div>
 
@@ -41,7 +41,7 @@
             
                 <h1><u>Working</u></h1><br/><br/> 
                 
-                <!-- Here is where we want the image to be when dragged -->
+                <!-- Here is where we want the image to be after dropped -->
             
             </div>
             
@@ -51,7 +51,7 @@
             
                 <h1><u>Escalated</u></h1><br/><br/>
                 
-                <!-- Or here is where we want the image to be when dragged -->
+                <!-- Or here is where we want the image to be after dropped -->
             
             </div>
 
@@ -73,10 +73,11 @@
             try {
                 e.dataTransfer.setData('text/plain', e.target.id);
             } catch (ex) {
+                //For browsers that don't support text/plain
                 e.dataTransfer.setData('Text', e.target.id);
             }
             
-            //Caoture the DRAG SOURCE parent container element
+            //Capture the DRAG SOURCE parent container element
             sourceContainerId = this.parentElement.id;
             
         };
@@ -113,6 +114,7 @@
                 try {
                     id = e.dataTransfer.getData('text/plain');
                 } catch (ex) {
+                    //For browsers that don't support text/plain
                     id = e.dataTransfer.getData('Text');
                 }
                 
@@ -142,7 +144,7 @@
         //KEY POINTS
         //******************************************************************************	
         
-        //Add the event handlers for the DRAG SOURCE and DROP TARGET elements selected by data-role
+        //Add the event handlers for elements selected by data-role
         var targets = document.querySelectorAll('[data-role="drag-drop-target"]');
         [].forEach.call(targets, function(target) {
             
@@ -150,7 +152,6 @@
             //the DRAG SOURCE Id will be fetched from the event's DataTransfer payload
             //and the element will be re-parented to the DROP TARGET element
             target.addEventListener('drop', dropped, false);
-            
             target.addEventListener('dragenter', dragEnter, false);
             target.addEventListener('dragover', dragOver, false);
             target.addEventListener('dragleave', dragLeave, false);
@@ -162,7 +163,6 @@
             //The DRAG SOURCE gets a listener for the dragstart event where
             //its element Id will be loaded into the event's DataTransfer payload
             source.addEventListener('dragstart', dragStart, false);
-
             source.addEventListener('drag', drag, false);
             source.addEventListener('dragend', dragEnd, false);
         });            
