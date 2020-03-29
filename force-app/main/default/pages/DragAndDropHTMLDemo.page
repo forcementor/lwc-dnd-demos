@@ -24,35 +24,25 @@
             <!-- Drag and Drop Sample -->
             <div id="source-container" 
                  data-role="drag-drop-source">
-            
                 <h1><u>New</u></h1><br/><br/>    
-
                 <!-- Starting place for the image -->
                 <img id="case-image" 
                      draggable="true" 
                      width = "225px"
                      height = "175px"
                      src="{!$Resource.Case}" />
-
             </div>
 
             <div id="target-container" 
                  data-role="drag-drop-target">
-            
                 <h1><u>Working</u></h1><br/><br/> 
-                
                 <!-- Here is where we want the image to be after dropped -->
-            
             </div>
-            
             
             <div id="another-target-container" 
                  data-role="drag-drop-target">
-            
                 <h1><u>Escalated</u></h1><br/><br/>
-                
                 <!-- Or here is where we want the image to be after dropped -->
-            
             </div>
 
         </body>
