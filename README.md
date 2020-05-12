@@ -30,11 +30,11 @@ Next run the CreateOrg.sh script in your terminal as follows (this is for a Mac,
 
 1 - Creates 30 day scratch Org with the alias soDnD
 
-2 - Opens the scratch Org
+2 - Pushes the project metadata to the scratch Org
 
-3 - Pushes the project metadata to the scratch Org
+3 - Pushes some sample Account, Contact and Case data to the scratch Org
 
-4 - Pushes some sample Account, Contact and Case data to the scratch Org
+4 - Opens the scratch Org
 
 Once the org is open in your browser, select the Drag and Drop app from the App Launcher.
 
