@@ -34,8 +34,6 @@ Next run the CreateOrg.sh script in your terminal as follows (this is for a Mac,
 
 3 - Pushes some sample Account, Contact and Case data to the scratch Org
 
-4 - Opens the scratch Org
-
-Once the org is open in your browser, select the Drag and Drop app from the App Launcher.
+4 - Opens the scratch Org and navigates to the first Demo page 
 
 Play and dissect!
