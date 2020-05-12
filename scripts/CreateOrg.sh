@@ -6,4 +6,4 @@ sfdx force:source:push
 echo "*** Push data to scratch Org..."
 sfdx force:apex:execute -f ./scripts/ResetData.txt
 echo "*** Opening scratch Org..."
-sfdx force:org:open
+sfdx force:org:open --path "/lightning/n/HTML_Standard_DnD_Example"
