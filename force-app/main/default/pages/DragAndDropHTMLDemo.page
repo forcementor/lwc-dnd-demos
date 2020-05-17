@@ -1,3 +1,8 @@
+<!-- 
+Drag and Drop pattern and JavaScript attributed to Craig Shoemaker from his course on Pluralsight.com
+HTML5 Fundamentals: Module 7 - Drag and Drop
+https://app.pluralsight.com/library/courses/html5-fundamentals
+-->
 <apex:page docType="html"> 
     
     <html lang="en">
@@ -52,7 +57,7 @@
         //Placeholder of the DRAG SOURCE parent container id
         var sourceContainerId;
         
-        var dragStart = function(e) {
+        var dragStart = function(event) {
             console.log('source: dragstart');
             
             //******************************************************************************	
@@ -61,10 +66,10 @@
             
             //Load the DataTransfer object on the event with the element id
             try {
-                e.dataTransfer.setData('text/plain', e.target.id);
+                event.dataTransfer.setData('text/plain', event.target.id);
             } catch (ex) {
                 //For browsers that don't support text/plain
-                e.dataTransfer.setData('Text', e.target.id);
+                event.dataTransfer.setData('Text', event.target.id);
             }
             
             //Capture the DRAG SOURCE parent container element
@@ -72,21 +77,21 @@
             
         };
         
-        var cancel = function(e) {
-            if (e.preventDefault) e.preventDefault();
-            if (e.stopPropagation) e.stopPropagation();
+        var cancel = function(event) {
+            if (event.preventDefault) event.preventDefault();
+            if (event.stopPropagation) event.stopPropagation();
             return false;
         };
         
-        var dragEnd = function(e) {
+        var dragEnd = function(event) {
             console.log('source: dragend');
         };
         
-        var drag = function(e) {
+        var drag = function(event) {
             console.log('source: drag');
         };
         
-        var dropped = function(e) {
+        var dropped = function(event) {
             var id;
             
             console.log('target: drop');
@@ -98,34 +103,34 @@
             //Make sure the drop is on a different container than the original container 
             //for the DRAG SOURCE
             if (this.id !== sourceContainerId) {
-                cancel(e);
+                cancel(event);
                 
                 //Fetch the DRAG SOURCE element id from the event's DataTransfer object
                 try {
-                    id = e.dataTransfer.getData('text/plain');
+                    id = event.dataTransfer.getData('text/plain');
                 } catch (ex) {
                     //For browsers that don't support text/plain
-                    id = e.dataTransfer.getData('Text');
+                    id = event.dataTransfer.getData('Text');
                 }
                 
                 //Re-assign the DRAG SOURCE element to its new DROP TARGET parent element in the DOM
                 //which will rerender it in the new container
-                e.target.appendChild(document.querySelector('#' + id));
+                event.target.appendChild(document.querySelector('#' + id));
                 
             }
         };
         
-        var dragEnter = function(e) {
-            cancel(e);
+        var dragEnter = function(event) {
+            cancel(event);
             console.log('target: dragenter');
         };
         
-        var dragOver = function(e) {
-            cancel(e);
+        var dragOver = function(event) {
+            cancel(event);
             console.log('target: dragover');
         };
         
-        var dragLeave = function(e) {
+        var dragLeave = function(event) {
             console.log('target: dragleave');
         };
         
